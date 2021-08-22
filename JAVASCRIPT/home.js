@@ -1,2 +1,3 @@
 console.log('hello');
-alert(('Fuck Off'));
+var f = "PISSOFF"
+alert(f); 
