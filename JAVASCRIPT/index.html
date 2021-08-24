@@ -4,50 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=, initial-scale=1.0"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <title>CHALLENGES</title>
 </head>
 <body >
     <script src="home.js"></script>
-    <div class="container-1">
+
+    <div class="container">
         <h2>Challenge 1: Your age in day </h2>
-        <div class = "challenge-1"> 
+        <div class = "button"> 
             <div>
                 <button class="btn btn-primary" onclick="ageInDays()">ClickMe</button>
             </div>  
-
             <div>
                 <button class="btn btn-danger" onclick = "reset()">Reset</button>
             </div>
         </div>
-        <div class="challenge-1"> 
-            <div id="result-box">  </div>
+        <div class="result-1" id= "result-box"> 
         </div>
+        <hr color="black"/><br><br><br><br><br>
     </div>
 
 
-    <div class="container-2">
-        <h2>Challenge2: Cat Generator</h2>
-        <div class = "challenge-2">
+    <div class="container">
+        <h2>Challenge2: Get Random Pic</h2>
+        <div class = "button">
             <div>
                 <button class="btn btn-success" onclick="GetCats()">GET PICS</button>
             </div>
         </div>
-        <div class = "pic-box" id="CatBox"></div>
+        <div class = "result-2" id="CatBox"></div>
+        <hr color="black"/><br><br><br><br><br>
     </div>
 
 
-    <div class = "container-2"> 
-        <h2> Challenge 3: </h2>
-        <div class="challenge-1">
+    <div class = "container"> 
+        <h2> Challenge 3: Rock, Paper, Scissors</h2>
+        <div class="button" id = "dis">
+            <div class="RPSbutton" id="Options">
+                <img id = "Rock"src="https://pngimage.net/wp-content/uploads/2018/06/rocha-desenho-png-1.png" onclick="RPSgame(this)" width= 100px />
+                <img id = "Paper" src="C:\Users\User\Downloads\Paper.jpg" onclick="RPSgame(this)" width= 100px />
+                <img id = "Scissor" src= "C:\Users\User\Downloads\Scissor.png" onclick="RPSgame(this)" width= 100px />
+            </div>  
+        </div>
+        <div class="button">
+            <button class="btn btn-danger" id = "again" onclick="again()" >AGAIN</button> 
+        </div>
+        <hr color="black"/><br><br><br><br><br>
+    </div>
+
+
+    <div class = "container"> 
+        <h2> Challenge 4: Change The color of all buttons</h2>
+        <div class="button">
             <div>
                 <button class="btn btn-success" onclick=""></button>
             </div>
         </div>
-        <div class = "pic-box" id="">
+        <div class = "img-result" id="">
         </div>
+        <hr color="black"/><br/>
     </div>
 </body>
 </html> 

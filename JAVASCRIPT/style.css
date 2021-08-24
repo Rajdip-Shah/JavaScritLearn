@@ -1,37 +1,35 @@
-.container-1{
-    border: 1px solid black;
+.container{
+    /* border: 1px solid black; */
     padding: 10px ;
     width : 80%;
     margin: 0 auto;
     text-align: center;
 }
 
-.challenge-1{
+.button, .result-1{
     display : flex ;
-    border: 1px solid black;
-    padding: 10px ;
+    border: 1px solid black; 
+    margin: 20px ;
     justify-content: center;
 }
 
-.challenge-1 div{
-    padding: 10px ; 
+.button div{
+    margin: 10px ; 
     align-items: center;
 }
 
-.container-2{
-    border: 1px solid red;
-    width : 80%;
-    margin: 0 auto;
-    padding: 10px ;
-    justify-content: center;
+.img-result, .result-2 img{
+    margin: 10px ;
+    justify-content: space-around;
+    box-shadow: 0px 10px 40px;
 }
 
-.challenge-2{
+.RPSbutton {
     display : flex ;
-    border: 1px solid blue;
-    justify-content: center;
+    padding: 10px;
+    justify-content: space-around;
 }
-
-.pic-box img{
-    padding: 10px ;
+.RPSbutton img:hover{
+    box-shadow: 0px 10px 40px rgb(82, 34, 192);
+    margin: 2px;
 }
