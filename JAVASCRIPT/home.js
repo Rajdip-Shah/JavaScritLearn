@@ -17,7 +17,7 @@ function reset(){
 function GetImg(){
     var picShow = document.createElement("img");
     document.getElementById("GenerateImg").appendChild(picShow) ;
-    picShow.src = 'https://picsum.photos/'+(j+rand())+'/' + (i + rand()) +'?random='+ randomChoice();
+    picShow.src = 'https://picsum.photos/'+(200+rand())+'/' + (300 + rand()) +'?random='+ randomChoice();}
 
 function rand(){ return Math.floor(Math.random() * 90)} ;
 
@@ -92,29 +92,51 @@ function again (){
 </div>   `
 }
 
-// ------------------------------------------ROCK----- PAPER -------- SCISSORS------------------------------------------------------- GAME 
+// --------------------ROCK----- PAPER ------- SCISSORS------- GAME ------------------------------------------------------------------
 
-let allButtons = document.getElementsByTagName('button');
-var DefaultButtons = [];
-for (let i = 0; i < allButtons[length]; i++){
-    DefaultButtons.push(allButtons[i]) ; }
-console.log (DefaultButtons)
+//-----------------------------BLACK ----JACK-----------------------------------------------
 
-function ChangeColor(selectedOption){ 
-    ButtonSetup = {
-        'Random': randomfunc(), 
-        "Red": redFunc(), 
-        "Green" : greenFunc(), 
-        "Reset" : resetFunc()
+let BlackJack = {
+    'you':{'box': 'UserBox', 'score': 'yourScore','CurrentScore':0},
+    'dealer':{'box': 'DealerBox', 'score': 'dealerScore', 'CurrentScore':0},
+};
+const YOU = BlackJack['you']
+const DEALER = BlackJack['dealer']
+const hitSound = new Audio('CARDS PIC\\Hit.mp3')
+
+function BJhit(){
+    ThrowCard(DEALER);
+}
+
+function ThrowCard(CardThrowTurn){
+    let yourCards = document.createElement('img');
+    document.getElementById(CardThrowTurn['box']).appendChild(yourCards);
+    yourCards.src = randomCard ()['link'];
+    hitSound.play();
+}
+function randomCard (){
+    cards = {
+        0: {'link':'CARDS PIC\\2.png', 'value':2},
+        1: {'link':'CARDS PIC\\3.png', 'value':3},
+        2: {'link':'CARDS PIC\\4.png', 'value':4},
+        3: {'link':'CARDS PIC\\5.png', 'value':5},
+        4: {'link':'CARDS PIC\\6.png', 'value':6},
+        5: {'link':'CARDS PIC\\7.png', 'value':7},
+        6: {'link':'CARDS PIC\\8.png', 'value':8},
+        7: {'link':'CARDS PIC\\9.png', 'value':9},
+        8: {'link':'CARDS PIC\\10.png', 'value':10},
+        9: {'link':'CARDS PIC\\joker.jpg', 'value':11},
+        10: {'link':'CARDS PIC\\Queen.jpg', 'value':12},
+        11: {'link':'CARDS PIC\\King.jpg', 'value':13},
+        12: {'link':'CARDS PIC\\A.png', 'value':14},
     }
-    value = selectedOption.value
-    console.log (value)
-    action = ButtonSetup[selectedOption.value]
+    return cards[BJrand()];
 }
 
-function randomfunc(){
+function BJrand(){ return (Math.floor(Math.random() * 13))} ;
 
+function deal(CardThrowTurn){ 
+    userImgs = document.getElementById(CardThrowTurn['box']).getElementsByTagName('img');
+    for (var i = 0; i < userImgs.length; i+1){
+        userImgs[i].remove();}
 }
-function redFunc(){}
-function greenFunc(){}
-function resetFunc(){}

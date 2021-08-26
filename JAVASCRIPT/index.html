@@ -24,7 +24,7 @@
         </div>
         <div class="result-1" id= "result-box"> 
         </div>
-        <hr color="black"/><br/><br/><br/>
+        <br/><br/><br/><br/>
     </div>
 
 
@@ -37,7 +37,7 @@
         </div>
         <div class = "result-2" id="GenerateImg"></div>
         <p id="try" > </p>
-        <hr color="black"/><br/><br/><br/>
+        <br/><br/><br/><br/>
     </div>
 
 
@@ -53,33 +53,49 @@
         <div class="button">
             <button class="btn btn-danger" onclick="again()" >AGAIN</button> 
         </div>
-        <hr color="black"/><br/><br/><br/>
+        <br/><br/><br/><br/>
     </div>
-
-
-    <div class = "container"> 
-        <h2> Challenge 4: Change The color of all buttons</h2>
-        <div class="button">
-            <form action="">
-                <select name = "backdrop" id = "ToggleButton" onChange ="ChangeColor(this)"> 
-                    <option value= "Random"> Random</option>
-                    <option value= "Red"> Red</option>
-                    <option value= "Green"> Green</option>
-                    <option value= "Reset"> Reset </option>
-                </select>
-            </form>
-            <button class="btn btn-primary"> FACEBOOK</button>
-            <button class="btn btn-success"> google</button>
-            <button class="btn btn-danger"> Youtube</button>
-            <button class="btn btn-dark"> Instagram</button>
-        </div>
-    <br/><hr color="black"/><br/>
-    </div>
-
 
     <div class="container">
-        <h2>Challenge 5: Black Jack</h2> 
+        <h2>Challenge 4: Black Jack</h2> 
+        <h3> <span id = "gameResult" > <!-- Let's Play -->
+            Let's play
+        </span></h3>
+
+        <div class = "BJPlayBox"> <!-- The green Background  -->
+            <div > <!-- YOU -->
+                <h3>YOU: <span id = "yourScore" >0</span></h3>
+                <div id = "UserBox"> 
+
+                </div>
+            </div> 
+
+            <div id = 'DealerBox'>  <!-- BOT -->
+                <h3>DEALER: <span id = "dealerScore">0</span></h3>
+            </div>
+        </div>
+
+    <!--PLAY BUTTONS  -->
+        <div class="playButtons"> 
+            <button id = "hitButton" class="btn btn-primary btn-lg mr-5" onclick="BJhit()"> HIT</button>
+            <button id = "standButton" class="btn btn-success btn-lg mr-5"> STAND</button>
+            <button id = "dealButton" class="btn btn-danger btn-lg " onclick="deal()"> DEAL</button>
+        </div>
         
+        <div class = "score"> <!-- PLAYER SCORES  -->
+            <table> 
+                <tr>
+                    <th>Wins</th>
+                    <th>Losses</th>
+                    <th>Draw</th>
+                </tr>
+                <tr>
+                    <td><span id = "wins">0</span></td>
+                    <td><span id = "losses">0</span></td>
+                    <td><span id = "draw">0</span></td>
+                </tr>
+            </table>
+        </div> 
     </div>
 </body>
 </html> 
