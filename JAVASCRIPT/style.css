@@ -8,14 +8,20 @@
 
 .button, .result-1{
     display : flex ;
-    border: 1px solid black; 
-    margin: 20px ;
-    justify-content: center;
+    /* border: 1px solid black;  */
+    padding: 10px;
+    flex-wrap: wrap ;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .button div{
     margin: 10px ; 
     align-items: center;
+}
+
+.button button{
+    padding: 10px;
 }
 
 .img-result, .result-2 img{

@@ -8,18 +8,24 @@ function ageInDays () {
     h1.appendChild(text);
 }
 
-
 function reset(){
     document.getElementById("resultAge").remove();
 }
 
-function GetCats(){
-    var cat_pic = document.createElement("img");
-    var link = 'https://source.unsplash.com/random/300x200?sig=${Math.random()}' ;
-    document.getElementById("CatBox").appendChild(cat_pic) ;
-    cat_pic.src = link;
-    link.remove();
-}
+
+// ------------------------RANDOM------- PIC------GENERATOR---------------------------------
+function GetImg(){
+    var picShow = document.createElement("img");
+    document.getElementById("GenerateImg").appendChild(picShow) ;
+    for (let i=300+rand(); i>200; i++) {
+        for (let j=200+rand(); j>200; j++) {
+            picShow.src = 'https://picsum.photos/'+j+'/' + i +'?random='+ randomChoice();
+            break ;}
+        break ;}}
+        
+function rand(){ return Math.floor(Math.random() * 90)} ;
+
+// ------------------------------------------ROCK----- PAPER -------- SCISSORS------------------------------------------------------- GAME 
 
 function RPSgame (choice){
     let humanChoice = choice.id ;
@@ -89,3 +95,30 @@ function again (){
     <img id = "Scissor" src= "C:\\Users\\User\\Downloads\\Scissor.png" onclick="RPSgame(this)" width= 100px />
 </div>   `
 }
+
+// ------------------------------------------ROCK----- PAPER -------- SCISSORS------------------------------------------------------- GAME 
+
+let allButtons = document.getElementsByTagName('button');
+var DefaultButtons = [];
+for (let i = 0; i < allButtons[length]; i++){
+    DefaultButtons.push(allButtons[i]) ; }
+console.log (DefaultButtons)
+
+function ChangeColor(selectedOption){ 
+    ButtonSetup = {
+        'Random': randomfunc(), 
+        "Red": redFunc(), 
+        "Green" : greenFunc(), 
+        "Reset" : resetFunc()
+    }
+    value = selectedOption.value
+    console.log (value)
+    action = ButtonSetup[selectedOption.value]
+}
+
+function randomfunc(){
+
+}
+function redFunc(){}
+function greenFunc(){}
+function resetFunc(){}

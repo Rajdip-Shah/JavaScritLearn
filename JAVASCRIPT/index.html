@@ -32,10 +32,11 @@
         <h2>Challenge2: Get Random Pic</h2>
         <div class = "button">
             <div>
-                <button class="btn btn-success" onclick="GetCats()">GET PICS</button>
+                <button class="btn btn-success" onclick="GetImg()">GET PICS</button>
             </div>
         </div>
-        <div class = "result-2" id="CatBox"></div>
+        <div class = "result-2" id="GenerateImg"></div>
+        <p id="try" > </p>
         <hr color="black"/><br/><br/><br/>
     </div>
 
@@ -50,7 +51,7 @@
             </div>  
         </div>
         <div class="button">
-            <button class="btn btn-danger" id = "again" onclick="again()" >AGAIN</button> 
+            <button class="btn btn-danger" onclick="again()" >AGAIN</button> 
         </div>
         <hr color="black"/><br/><br/><br/>
     </div>
@@ -59,13 +60,26 @@
     <div class = "container"> 
         <h2> Challenge 4: Change The color of all buttons</h2>
         <div class="button">
-            <div>
-                <button class="btn btn-success" onclick=""></button>
-            </div>
+            <form action="">
+                <select name = "backdrop" id = "ToggleButton" onChange ="ChangeColor(this)"> 
+                    <option value= "Random"> Random</option>
+                    <option value= "Red"> Red</option>
+                    <option value= "Green"> Green</option>
+                    <option value= "Reset"> Reset </option>
+                </select>
+            </form>
+            <button class="btn btn-primary"> FACEBOOK</button>
+            <button class="btn btn-success"> google</button>
+            <button class="btn btn-danger"> Youtube</button>
+            <button class="btn btn-dark"> Instagram</button>
         </div>
-        <div class = "img-result" id="">
-        </div>
-        <hr color="black"/><br/>
+    <br/><hr color="black"/><br/>
+    </div>
+
+
+    <div class="container">
+        <h2>Challenge 5: Black Jack</h2> 
+        
     </div>
 </body>
 </html> 
