@@ -17,12 +17,8 @@ function reset(){
 function GetImg(){
     var picShow = document.createElement("img");
     document.getElementById("GenerateImg").appendChild(picShow) ;
-    for (let i=300+rand(); i>200; i++) {
-        for (let j=200+rand(); j>200; j++) {
-            picShow.src = 'https://picsum.photos/'+j+'/' + i +'?random='+ randomChoice();
-            break ;}
-        break ;}}
-        
+    picShow.src = 'https://picsum.photos/'+(j+rand())+'/' + (i + rand()) +'?random='+ randomChoice();
+
 function rand(){ return Math.floor(Math.random() * 90)} ;
 
 // ------------------------------------------ROCK----- PAPER -------- SCISSORS------------------------------------------------------- GAME 
