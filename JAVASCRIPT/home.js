@@ -156,8 +156,7 @@ function randomCard (){
         11: {'link':'CARDS PIC\\King.jpg', 'value':10},
         12: {'link':'CARDS PIC\\A.png', 'value':11},
     }
-    return cards[BJrand()];
-}
+    return cards[BJrand()];}
 
 function ThrowCard(playerTurn){
     let yourCards = document.createElement('img');
