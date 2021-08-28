@@ -97,23 +97,42 @@ function again (){
 //-----------------------------BLACK ----JACK-----------------------------------------------
 
 let BlackJack = {
-    'you':{'box': 'UserBox', 'score': 'yourScore','CurrentScore':0},
-    'dealer':{'box': 'DealerBox', 'score': 'dealerScore', 'CurrentScore':0},
+    'you':{'box': 'UserBox', 'score': 'yourScore','CurrentScore':0, "BUST": false},
+    'dealer':{'box': 'DealerBox', 'score': 'dealerScore', 'CurrentScore':0, "BUST": false},
+    'gamefinalresult': {"win":0,"loose":0,"draw":0}
 };
 const YOU = BlackJack['you']
 const DEALER = BlackJack['dealer']
+const FINALSCORE = BlackJack['gamefinalresult']
 const hitSound = new Audio('CARDS PIC\\Hit.mp3')
+const looseSound = new Audio('CARDS PIC\\Loose.mp3')
+const dealSound = new Audio('CARDS PIC\\Deal.mp3')
+const standSound = new Audio('CARDS PIC\\Stand.mp3')
+const winSound = new Audio('CARDS PIC\\Win.mp3')
+const drawSound = new Audio('CARDS PIC\\osuruk ses efekti.mp3')
+let numCard ;
+
+// ------------------------------------------------------------------------
 
 function BJhit(){
-    ThrowCard(DEALER);
+    hitSound.play();
+    ThrowCard(YOU);
+    updateScore(numCard, YOU);
+    showScore(YOU);
 }
 
-function ThrowCard(CardThrowTurn){
-    let yourCards = document.createElement('img');
-    document.getElementById(CardThrowTurn['box']).appendChild(yourCards);
-    yourCards.src = randomCard ()['link'];
-    hitSound.play();
+
+function dealerBot() {
+    standSound.play();
+    ThrowCard(DEALER);
+    updateScore(numCard, DEALER);
+    showScore(DEALER);
+    if (DEALER['CurrentScore'] > 16){
+        winner(YOU['CurrentScore'], DEALER['CurrentScore']);}
 }
+
+function BJrand(){ return (Math.floor(Math.random() * 13))} ;
+
 function randomCard (){
     cards = {
         0: {'link':'CARDS PIC\\2.png', 'value':2},
@@ -125,18 +144,110 @@ function randomCard (){
         6: {'link':'CARDS PIC\\8.png', 'value':8},
         7: {'link':'CARDS PIC\\9.png', 'value':9},
         8: {'link':'CARDS PIC\\10.png', 'value':10},
-        9: {'link':'CARDS PIC\\joker.jpg', 'value':11},
-        10: {'link':'CARDS PIC\\Queen.jpg', 'value':12},
-        11: {'link':'CARDS PIC\\King.jpg', 'value':13},
-        12: {'link':'CARDS PIC\\A.png', 'value':14},
+        9: {'link':'CARDS PIC\\joker.jpg', 'value':10},
+        10: {'link':'CARDS PIC\\Queen.jpg', 'value':10},
+        11: {'link':'CARDS PIC\\King.jpg', 'value':10},
+        12: {'link':'CARDS PIC\\A.png', 'value':11},
     }
     return cards[BJrand()];
 }
 
-function BJrand(){ return (Math.floor(Math.random() * 13))} ;
+function ThrowCard(playerTurn){
+    let yourCards = document.createElement('img');
+    document.getElementById(playerTurn['box']).appendChild(yourCards);
+    let cardNum = randomCard() ;
+    numCard = cardNum
+    yourCards.src = cardNum['link'];
+}
 
-function deal(CardThrowTurn){ 
-    userImgs = document.getElementById(CardThrowTurn['box']).getElementsByTagName('img');
-    for (var i = 0; i < userImgs.length; i+1){
-        userImgs[i].remove();}
+function updateScore(card, playerTurn){ 
+    playerTurn['CurrentScore'] += card['value'];
+}
+
+function showScore (playerTurn){
+    if (playerTurn['CurrentScore'] <= 21){
+        document.getElementById(playerTurn['score']).textContent =  playerTurn['CurrentScore'];
+    }
+    else {
+        document.getElementById(playerTurn['score']).textContent =  "BUST";
+        document.getElementById(playerTurn['score']).style.color = "red";
+        playerTurn['BUST'] = true;
+    }
+}
+
+function deal(){ 
+    dealSound.play();
+    //YOUR CARDS
+    let Imgs = document.getElementById(YOU['box']).getElementsByTagName('img');
+    for (var i = 0; i < Imgs.length; i+1){
+        Imgs[i].remove();}
+    YOU['CurrentScore'] = 0
+    document.getElementById(YOU['score']).textContent =  '0' ;
+    document.getElementById(YOU['score']).style.color = "white";
+    // dealer CARDS
+    let ImgsD = document.getElementById(DEALER['box']).getElementsByTagName('img');
+    for (var i = 0; i < ImgsD.length; i+1){
+        ImgsD[i].remove();}
+    DEALER['CurrentScore'] = 0
+    document.getElementById(DEALER['score']).textContent =  '0' ;
+    document.getElementById(DEALER['score']).style.color = "white";
+    // WINNER
+    DEALER['BUST'] = false 
+    YOU['BUST'] = false 
+    document.getElementById('gameResult').textContent = "Let's Play";
+    document.getElementById('gameResult').style.color = "black";
+
+}
+
+function winner (yourScore, DealerScore){
+    if (YOU['BUST'] === true){
+        if (DEALER['BUST'] === true){
+            drawSound.play();
+            document.getElementById('gameResult').textContent = "DRAW";
+            let add1 = FINALSCORE['draw'] += 1;
+            document.getElementById('draw').textContent = add1
+            document.getElementById('draw').style.color = "blue";
+            document.getElementById('gameResult').style.color = "blue";
+
+        }else if(DEALER['BUST'] === false) {
+            looseSound.play();
+            document.getElementById('gameResult').textContent = "YOU LOOSE";
+            let add2  = FINALSCORE['loose'] += 1;
+            document.getElementById('losses').textContent =  add2; 
+            document.getElementById('losses').style.color = "red";
+            document.getElementById('gameResult').style.color = "red";}
+    }
+    else if (DEALER['BUST'] === true && YOU['BUST'] === false ){
+        winSound.play();
+        document.getElementById('gameResult').textContent = "YOU WON";
+        let add3 = FINALSCORE['win'] += 1;
+        document.getElementById('wins').textContent = add3;
+        document.getElementById('wins').style.color = "green";
+        document.getElementById('gameResult').style.color = "green";
+    }
+    else if (yourScore == DealerScore){
+        drawSound.play();
+        document.getElementById('gameResult').textContent = "DRAW";
+        let add4 = FINALSCORE['draw'] += 1;
+        document.getElementById('draw').textContent = add4;
+        document.getElementById('draw').style.color = 'blue';
+        document.getElementById('gameResult').style.color = "blue";
+        
+    }
+    else if (yourScore < DealerScore){
+        looseSound.play();
+        document.getElementById('gameResult').textContent = "YOU LOOSE";
+        let add5  = FINALSCORE['loose'] += 1;
+        document.getElementById('losses').textContent =  add5; 
+        document.getElementById('losses').style.color = "red";
+        document.getElementById('gameResult').style.color = "red";
+    }
+    else if (yourScore > DealerScore){
+        winSound.play();
+        document.getElementById('gameResult').textContent = "YOU WON";
+        let add6 = FINALSCORE['win'] += 1;
+        document.getElementById('wins').textContent = add6;
+        document.getElementById('wins').style.color = "green";
+        document.getElementById('gameResult').style.color = "green";
+    }
 }

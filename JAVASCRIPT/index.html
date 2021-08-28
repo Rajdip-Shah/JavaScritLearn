@@ -63,11 +63,9 @@
         </span></h3>
 
         <div class = "BJPlayBox"> <!-- The green Background  -->
-            <div > <!-- YOU -->
+            <div id = "UserBox"> <!-- YOU -->
                 <h3>YOU: <span id = "yourScore" >0</span></h3>
-                <div id = "UserBox"> 
-
-                </div>
+     
             </div> 
 
             <div id = 'DealerBox'>  <!-- BOT -->
@@ -78,7 +76,7 @@
     <!--PLAY BUTTONS  -->
         <div class="playButtons"> 
             <button id = "hitButton" class="btn btn-primary btn-lg mr-5" onclick="BJhit()"> HIT</button>
-            <button id = "standButton" class="btn btn-success btn-lg mr-5"> STAND</button>
+            <button id = "standButton" class="btn btn-success btn-lg mr-5" onclick = "dealerBot()"> STAND</button>
             <button id = "dealButton" class="btn btn-danger btn-lg " onclick="deal()"> DEAL</button>
         </div>
         
