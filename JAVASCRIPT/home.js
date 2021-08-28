@@ -103,16 +103,16 @@ let BlackJack = {
     'ButtonStatus' : { "stand" : false, 'result':false, 'dealed':false} 
     }
 
-const YOU = BlackJack['you']
-const DEALER = BlackJack['dealer']
-const FINALSCORE = BlackJack['gamefinalresult']
-const BUTTONSTATUS = BlackJack['ButtonStatus']
-const hitSound = new Audio('CARDS PIC\\Hit.mp3')
-const looseSound = new Audio('CARDS PIC\\Loose.mp3')
-const dealSound = new Audio('CARDS PIC\\Deal.mp3')
-const standSound = new Audio('CARDS PIC\\Stand.mp3')
-const winSound = new Audio('CARDS PIC\\Win.mp3')
-const drawSound = new Audio('CARDS PIC\\osuruk ses efekti.mp3')
+const YOU = BlackJack['you'];
+const DEALER = BlackJack['dealer'];
+const FINALSCORE = BlackJack['gamefinalresult'];
+const BUTTONSTATUS = BlackJack['ButtonStatus'];
+const hitSound = new Audio('CARDS PIC\\Hit.mp3');
+const looseSound = new Audio('CARDS PIC\\Loose.mp3');
+const dealSound = new Audio('CARDS PIC\\Deal.mp3');
+const standSound = new Audio('CARDS PIC\\Stand.mp3');
+const winSound = new Audio('CARDS PIC\\Win.mp3');
+const drawSound = new Audio('CARDS PIC\\osuruk ses efekti.mp3');
 let numCard ;
 
 // ------------------------------------------------------------------------
@@ -127,15 +127,15 @@ function BJhit(){
 }
 
 function dealerBot() {
-    if (BUTTONSTATUS['result'] === false){
-        BUTTONSTATUS['stand'] = true;
-        standSound.play();
-        ThrowCard(DEALER);
-        updateScore(numCard, DEALER);
-        showScore(DEALER);
-        if (DEALER['CurrentScore'] > 16){
-            winner(YOU['CurrentScore'], DEALER['CurrentScore']);}
-    }
+        while ((DEALER['CurrentScore'] <= 16) && (BUTTONSTATUS['result'] === false)){
+            BUTTONSTATUS['stand'] = true;
+            standSound.play();
+            ThrowCard(DEALER);
+            updateScore(numCard, DEALER);
+            showScore(DEALER);
+        }
+        winner(YOU['CurrentScore'], DEALER['CurrentScore']);
+
 }
 
 function BJrand(){ return (Math.floor(Math.random() * 13))} ;
