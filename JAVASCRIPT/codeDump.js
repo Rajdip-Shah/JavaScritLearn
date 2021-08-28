@@ -20,4 +20,7 @@
     <br/><br/><br/>
     </div>
 
-
+// ✅NO HIT AFTER STAND
+// ✅NO HIT AFTER YOUR BUST 
+// ✅NO STAND AFTER RESULTS TAKEN
+// ✅You can't hit DEAL before everybody's turn is over 

@@ -99,11 +99,14 @@ function again (){
 let BlackJack = {
     'you':{'box': 'UserBox', 'score': 'yourScore','CurrentScore':0, "BUST": false},
     'dealer':{'box': 'DealerBox', 'score': 'dealerScore', 'CurrentScore':0, "BUST": false},
-    'gamefinalresult': {"win":0,"loose":0,"draw":0}
-};
+    'gamefinalresult': {"win":0,"loose":0,"draw":0}, 
+    'ButtonStatus' : { "stand" : false, 'result':false, 'dealed':false} 
+    }
+
 const YOU = BlackJack['you']
 const DEALER = BlackJack['dealer']
 const FINALSCORE = BlackJack['gamefinalresult']
+const BUTTONSTATUS = BlackJack['ButtonStatus']
 const hitSound = new Audio('CARDS PIC\\Hit.mp3')
 const looseSound = new Audio('CARDS PIC\\Loose.mp3')
 const dealSound = new Audio('CARDS PIC\\Deal.mp3')
@@ -115,20 +118,24 @@ let numCard ;
 // ------------------------------------------------------------------------
 
 function BJhit(){
-    hitSound.play();
-    ThrowCard(YOU);
-    updateScore(numCard, YOU);
-    showScore(YOU);
+    if (BUTTONSTATUS['stand'] === false){
+        if (YOU['BUST'] === false){
+            hitSound.play();
+            ThrowCard(YOU);
+            updateScore(numCard, YOU);
+            showScore(YOU)}}
 }
 
-
 function dealerBot() {
-    standSound.play();
-    ThrowCard(DEALER);
-    updateScore(numCard, DEALER);
-    showScore(DEALER);
-    if (DEALER['CurrentScore'] > 16){
-        winner(YOU['CurrentScore'], DEALER['CurrentScore']);}
+    if (BUTTONSTATUS['result'] === false){
+        BUTTONSTATUS['stand'] = true;
+        standSound.play();
+        ThrowCard(DEALER);
+        updateScore(numCard, DEALER);
+        showScore(DEALER);
+        if (DEALER['CurrentScore'] > 16){
+            winner(YOU['CurrentScore'], DEALER['CurrentScore']);}
+    }
 }
 
 function BJrand(){ return (Math.floor(Math.random() * 13))} ;
@@ -175,31 +182,9 @@ function showScore (playerTurn){
     }
 }
 
-function deal(){ 
-    dealSound.play();
-    //YOUR CARDS
-    let Imgs = document.getElementById(YOU['box']).getElementsByTagName('img');
-    for (var i = 0; i < Imgs.length; i+1){
-        Imgs[i].remove();}
-    YOU['CurrentScore'] = 0
-    document.getElementById(YOU['score']).textContent =  '0' ;
-    document.getElementById(YOU['score']).style.color = "white";
-    // dealer CARDS
-    let ImgsD = document.getElementById(DEALER['box']).getElementsByTagName('img');
-    for (var i = 0; i < ImgsD.length; i+1){
-        ImgsD[i].remove();}
-    DEALER['CurrentScore'] = 0
-    document.getElementById(DEALER['score']).textContent =  '0' ;
-    document.getElementById(DEALER['score']).style.color = "white";
-    // WINNER
-    DEALER['BUST'] = false 
-    YOU['BUST'] = false 
-    document.getElementById('gameResult').textContent = "Let's Play";
-    document.getElementById('gameResult').style.color = "black";
-
-}
-
 function winner (yourScore, DealerScore){
+    BUTTONSTATUS['result'] = true ;
+    BUTTONSTATUS['dealed'] = true ;
     if (YOU['BUST'] === true){
         if (DEALER['BUST'] === true){
             drawSound.play();
@@ -249,5 +234,33 @@ function winner (yourScore, DealerScore){
         document.getElementById('wins').textContent = add6;
         document.getElementById('wins').style.color = "green";
         document.getElementById('gameResult').style.color = "green";
+    }
+}
+
+function deal(){ 
+    if (BUTTONSTATUS['dealed'] === true){
+        dealSound.play();
+        //YOUR CARDS
+        let Imgs = document.getElementById(YOU['box']).getElementsByTagName('img');
+        for (var i = 0; i < Imgs.length; i+1){
+            Imgs[i].remove();}
+        YOU['CurrentScore'] = 0
+        document.getElementById(YOU['score']).textContent =  '0' ;
+        document.getElementById(YOU['score']).style.color = "white";
+        // dealer CARDS
+        let ImgsD = document.getElementById(DEALER['box']).getElementsByTagName('img');
+        for (var i = 0; i < ImgsD.length; i+1){
+            ImgsD[i].remove();}
+        DEALER['CurrentScore'] = 0
+        document.getElementById(DEALER['score']).textContent =  '0' ;
+        document.getElementById(DEALER['score']).style.color = "white";
+        // WINNER
+        DEALER['BUST'] = false 
+        YOU['BUST'] = false 
+        document.getElementById('gameResult').textContent = "Let's Play";
+        document.getElementById('gameResult').style.color = "black";
+        BUTTONSTATUS['stand'] = false;
+        BUTTONSTATUS['result'] = false;
+        BUTTONSTATUS['dealed'] = false ;
     }
 }
