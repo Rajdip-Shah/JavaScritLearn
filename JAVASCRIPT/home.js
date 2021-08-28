@@ -97,8 +97,8 @@ function again (){
 //-----------------------------BLACK ----JACK-----------------------------------------------
 
 let BlackJack = {
-    'you':{'box': 'UserBox', 'score': 'yourScore','CurrentScore':0, "BUST": false},
-    'dealer':{'box': 'DealerBox', 'score': 'dealerScore', 'CurrentScore':0, "BUST": false},
+    'you':{'box': 'UserBox', 'score': 'yourScore','CurrentScore':0, "BUST": false, "ShowScore": 0},
+    'dealer':{'box': 'DealerBox', 'score': 'dealerScore', 'CurrentScore':0, "BUST": false, "ShowScore": 0},
     'gamefinalresult': {"win":0,"loose":0,"draw":0}, 
     'ButtonStatus' : { "stand" : false, 'result':false, 'dealed':false} 
     }
@@ -126,16 +126,32 @@ function BJhit(){
             showScore(YOU)}}
 }
 
-function dealerBot() {
-        while ((DEALER['CurrentScore'] <= 16) && (BUTTONSTATUS['result'] === false)){
+async function dealerBot() {
+    while ((DEALER['CurrentScore'] <= 16) && (BUTTONSTATUS['result'] === false)){
+        BUTTONSTATUS['stand'] = true;
+        hitSound.play();
+        ThrowCard(DEALER);
+        updateScore(numCard, DEALER);
+        showScore(DEALER);
+        await wait(randtime());
+        if (YOU['CurrentScore'] >= 17 && YOU['BUST'] === false && DEALER['CurrentScore'] <=21 && DEALER['ShowScore'] != YOU['ShowScore']){
+            await wait(randtime());
             BUTTONSTATUS['stand'] = true;
-            standSound.play();
+            hitSound.play();
             ThrowCard(DEALER);
             updateScore(numCard, DEALER);
             showScore(DEALER);
+            }
+
         }
         winner(YOU['CurrentScore'], DEALER['CurrentScore']);
+}
 
+function wait(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+function randtime(){
+    return ((Math.floor(Math.random())) * 500) + 1000 ;
 }
 
 function BJrand(){ return (Math.floor(Math.random() * 13))} ;
@@ -173,6 +189,8 @@ function updateScore(card, playerTurn){
 function showScore (playerTurn){
     if (playerTurn['CurrentScore'] <= 21){
         document.getElementById(playerTurn['score']).textContent =  playerTurn['CurrentScore'];
+        playerTurn['ShowScore'] = playerTurn['CurrentScore'];
+        console.log(playerTurn['ShowScore']);
     }
     else {
         document.getElementById(playerTurn['score']).textContent =  "BUST";
